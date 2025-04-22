@@ -17,7 +17,7 @@
 
     <color name="gray_light">#CCCCCC</color>
     <color name="gray_dark">#888888</color>
-
+    <color name="dark_gray">#666666</color>
     <!-- Text Colors -->
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#CCCCCC</color>
