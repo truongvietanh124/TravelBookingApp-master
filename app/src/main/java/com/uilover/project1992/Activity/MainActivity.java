@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot; // <<< THÊM IMPORT FIRES
 import com.google.firebase.firestore.FirebaseFirestore; // <<< THÊM IMPORT FIRESTORE
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.uilover.project1992.Model.Location;
+import com.uilover.project1992.Nav.UserGuideActivity;
 import com.uilover.project1992.R;
 import com.uilover.project1992.databinding.ActivityMainBinding;
 
@@ -80,7 +81,7 @@ public class MainActivity extends BaseActivity {
         initClassSeat();
         initDatePickup();
         setVariable();
-        setupBottomNav(); // <<< Gọi hàm cài đặt Bottom Nav
+        setupBottomNav(); // <<< Gọi hàm cài đặt Bottom com.uilover.project1992.Nav
     }
 
     // Kiểm tra trạng thái đăng nhập
@@ -163,6 +164,7 @@ public class MainActivity extends BaseActivity {
                 // Toast.makeText(this, "Explorer Clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.bookmark) {
                 // Xử lý Bookmark
+                startActivity(new Intent(MainActivity.this, UserGuideActivity.class));
                 // Toast.makeText(this, "Bookmark Clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.profile) {
                 Intent intent; // Khai báo Intent trong khối lệnh

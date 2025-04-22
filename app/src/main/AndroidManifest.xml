@@ -52,7 +52,10 @@
         <activity android:name=".Activity.PhoneLoginActivity" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.EditProfileActivity" />
-
+        <activity android:name=".Nav.UserGuideActivity" />
+        <activity android:name=".Nav.BookFlightActivity" />
+        <activity android:name=".Nav.ChangeAvatarActivity" />
+        <activity android:name=".Nav.CreateNewPostActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
