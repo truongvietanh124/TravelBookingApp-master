@@ -17,13 +17,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.uilover.project1992.R;
 import com.uilover.project1992.databinding.ActivityMainBinding;
+import com.uilover.project1992.databinding.ActivityProfileBinding;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageView ivProfileImage;
     private TextView tvUsername, tvUserEmail;
     private ImageView backBtn; // Thêm biến cho nút back
-    private ActivityMainBinding binding;
+    private ActivityProfileBinding binding;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
@@ -31,58 +32,62 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        // Ánh xạ các view từ layout
-        ivProfileImage = findViewById(R.id.iv_profile_image);
-        tvUsername = findViewById(R.id.tv_username);
-        tvUserEmail = findViewById(R.id.tv_user_email); // ID của TextView
-        backBtn = findViewById(R.id.backBtn); // Ánh xạ nút back
+        // Sử dụng binding cho activity_profile.xml
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot()); // Set content view từ root của binding
 
-        // Khởi tạo Firebase
+        // Ánh xạ view thông qua binding (ví dụ)
+        ivProfileImage = binding.ivProfileImage;
+        tvUsername = binding.tvUsername;
+        tvUserEmail = binding.tvUserEmail;
+        backBtn = binding.backBtn;
+        ImageButton btnEditProfile = binding.btnEditProfile;
+        Button logoutBtn = binding.btnLogout;
+
+        // Khởi tạo Firebase...
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-
-        ImageButton btnEditProfile = findViewById(R.id.btn_edit_profile);
-
-        btnEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
-                startActivity(intent);
-            }
+        // Listener cho edit profile...
+        btnEditProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+            startActivity(intent);
         });
 
+        // Load profile...
         if (currentUser != null) {
             loadUserProfile();
         } else {
-            // Xử lý trường hợp không có người dùng đăng nhập (ví dụ: chuyển về trang đăng nhập)
-            // Ví dụ:
-            // startActivity(new Intent(this, LoginActivity.class));
-            // finish();
+            // Xử lý chưa đăng nhập
         }
 
-        // Xử lý sự kiện click cho nút back
+        // Listener nút back...
         backBtn.setOnClickListener(v -> {
+            // Cân nhắc việc quay lại Activity trước đó thay vì luôn về MainActivity
+            // Hoặc nếu MainActivity là màn hình chính thì OK
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-            finish(); // Đóng ProfileActivity sau khi chuyển về MainActivity
-        });
-        Button logoutBtn = findViewById(R.id.btn_logout);
-        logoutBtn.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut(); // hoặc logout logic khác
-            startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
-        setupBottomNav();
+
+        // Listener logout...
+        logoutBtn.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+            finishAffinity(); // Đóng tất cả activity liên quan
+        });
+
+
+        setupBottomNav(); // Gọi sau khi binding đã sẵn sàng
     }
     private void setupBottomNav() {
         // ChipNavigationBar bottomNav = findViewById(R.id.bottom_nav); // Nếu không có trong binding
         // Nên dùng binding nếu bottom_nav nằm trực tiếp trong activity_main.xml
         ChipNavigationBar bottomNav = binding.bottomNav; // Giả sử ID là bottomNav trong binding
-
+        // ---- Quan trọng: Đánh dấu mục Profile là đang được chọn ----
+        bottomNav.setItemSelected(R.id.profile, true);
+        // ---------------------------------------------------------
         bottomNav.setOnItemSelectedListener(id -> { // Dùng lambda cho ngắn gọn
             if (id == R.id.home) {
                 // Đang ở Home rồi, không cần xử lý gì thêm hoặc refresh nếu cần

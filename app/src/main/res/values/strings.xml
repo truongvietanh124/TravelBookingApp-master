@@ -65,7 +65,7 @@
     <string name="from">from</string>
     <string name="to">to</string>
     <string name="toShort">to</string>
-    <string name="username">Email</string>
+    <string name="username" translatable="false">Email</string>
     <!-- Common -->
     <string name="app_name" translatable="false">My App</string>
     <string name="background_image" translatable="false">Background image</string>
@@ -92,4 +92,6 @@
     <string name="error_password_required" translatable="false">Password is required</string>
     <string name="error_password_length" translatable="false">Password must be at least 6 characters</string>
     <string name="login_with_instagram" translatable="false" />
+    <string name="experience_image_description" translatable="false" />
+    <string name="addExp" >Add EXP</string>
 </resources>
