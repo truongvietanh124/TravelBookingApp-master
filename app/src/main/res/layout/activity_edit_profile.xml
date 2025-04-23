@@ -119,12 +119,11 @@
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Save Changes"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#0075F1"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="32dp"
+            android:backgroundTint="#0075F1"
             android:fontFamily="sans-serif-medium"
-            android:background="@drawable/button_primary" />
+            android:text="Save Changes"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </ScrollView>
