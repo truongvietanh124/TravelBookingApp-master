@@ -76,12 +76,27 @@ public class MainActivity extends BaseActivity {
         }
 
         // --- Gọi các hàm khởi tạo khác ---
+        openNotification();
         initLocations();
         initPassengers();
         initClassSeat();
         initDatePickup();
         setVariable();
         setupBottomNav(); // <<< Gọi hàm cài đặt Bottom com.uilover.project1992.Nav
+    }
+
+    private void openNotification() {
+        binding.imageView4.setOnClickListener(v -> {
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                // Nếu đã đăng nhập thì mở NotificationActivity
+                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
+                startActivity(intent);
+            } else {
+                // Nếu chưa đăng nhập thì hiện thông báo hoặc chuyển sang màn hình đăng nhập
+                Toast.makeText(MainActivity.this, "Vui lòng đăng nhập để xem thông báo", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     // Kiểm tra trạng thái đăng nhập
