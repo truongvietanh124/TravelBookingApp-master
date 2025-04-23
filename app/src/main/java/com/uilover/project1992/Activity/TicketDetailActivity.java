@@ -1,13 +1,18 @@
 package com.uilover.project1992.Activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.uilover.project1992.Model.Flight;
 import com.uilover.project1992.databinding.ActivityTicketDetailBinding;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+
+
 
 public class TicketDetailActivity extends BaseActivity {
     private ActivityTicketDetailBinding binding;
@@ -21,6 +26,27 @@ public class TicketDetailActivity extends BaseActivity {
 
         getIntentExtra();
         setVariable();
+
+
+        binding.confirmButton.setOnClickListener(v -> {
+            SharedPreferences prefs = getSharedPreferences("notifications", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            // Chuyển flight sang JSON
+            Gson gson = new Gson();
+            String flightJson = gson.toJson(flight);
+
+            // Lưu dữ liệu
+            editor.putString("last_notification", "Bạn đã đặt thành công vé máy bay!");
+            editor.putString("flight_data", flightJson);
+            editor.apply();
+
+            // Quay lại MainActivity
+            Intent intent = new Intent(TicketDetailActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
 
     }
 
@@ -47,8 +73,8 @@ public class TicketDetailActivity extends BaseActivity {
                 .load(flight.getAirlineLogo())
                 .into(binding.logo);
     }
-
     private void getIntentExtra() {
         flight = (Flight) getIntent().getSerializableExtra("flight");
     }
+
 }
