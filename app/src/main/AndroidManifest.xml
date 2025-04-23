@@ -52,7 +52,7 @@
         <activity android:name=".Activity.PhoneLoginActivity" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.EditProfileActivity" />
-
+        <activity android:name=".Activity.FullCollectionActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

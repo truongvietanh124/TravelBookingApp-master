@@ -94,4 +94,12 @@
     <string name="login_with_instagram" translatable="false" />
     <string name="experience_image_description" translatable="false" />
     <string name="addExp" >Add EXP</string>
+    <string name="logout" >Log out</string>
+    <string name="collection" >Collection</string>
+    <string name="travel_process" >Travel process</string>
+    <string name="my_wallet" >My wallet</string>
+    <string name="my_order" translatable="false">My order</string>
+    <string name="username_placeholder" >User name</string>
+    <string name="user_email_placeholder" translatable="false">Email</string>
+    <string name="collection_preview_image_description" >Preview images</string>
 </resources>
