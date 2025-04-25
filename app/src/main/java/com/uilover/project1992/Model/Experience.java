@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Experience {
-
     private String id;
     private String title;
     private String description;
@@ -15,10 +14,11 @@ public class Experience {
     private String userId;
     private String userName;
     private long timestamp;
+    private float rating; // Thêm trường rating
     private Map<String, Boolean> likes;
-    private Map<String, Comment> comments; // Thay đổi từ List sang Map
+    private Map<String, Comment> comments;
 
-    // Constructor mặc định (Firebase cần có)
+    // Constructor mặc định
     public Experience() {
         this.id = "";
         this.title = "";
@@ -28,13 +28,14 @@ public class Experience {
         this.userId = "";
         this.userName = "";
         this.timestamp = 0;
+        this.rating = 0.0f; // Giá trị mặc định cho rating
         this.likes = new HashMap<>();
-        this.comments = new HashMap<>(); // Thay đổi từ List sang Map
+        this.comments = new HashMap<>();
     }
 
     // Constructor đầy đủ
     public Experience(String id, String title, String description, String location,
-                      String imageUrl, String userId, String userName, long timestamp) {
+                      String imageUrl, String userId, String userName, long timestamp, float rating) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -43,12 +44,21 @@ public class Experience {
         this.userId = userId;
         this.userName = userName;
         this.timestamp = timestamp;
+        this.rating = rating;
         this.likes = new HashMap<>();
-        this.comments = new HashMap<>(); // Thay đổi từ List sang Map
+        this.comments = new HashMap<>();
     }
 
-    // Getters và Setters (Firebase yêu cầu nếu bạn không dùng public fields)
+    // Thêm getter và setter cho rating
+    public float getRating() {
+        return rating;
+    }
 
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    // Các getter và setter khác giữ nguyên
     public String getId() {
         return id;
     }
@@ -129,12 +139,17 @@ public class Experience {
         this.comments = comments;
     }
 
-    // Phương thức tiện ích để chuyển đổi Map comments thành List
+    // Phương thức tiện ích để lấy danh sách bình luận
     public List<Comment> getCommentList() {
         List<Comment> commentList = new ArrayList<>();
         if (comments != null) {
             commentList.addAll(comments.values());
         }
         return commentList;
+    }
+
+    // Phương thức tiện ích để lấy số lượng bình luận
+    public int getCommentCount() {
+        return comments != null ? comments.size() : 0;
     }
 }

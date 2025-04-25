@@ -24,7 +24,8 @@
             android:exported="false" />
         <activity
             android:name=".Activity.FeedActivity"
-            android:exported="false" />
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"/>
         <activity
             android:name=".Activity.ExploreActivity"
             android:exported="false" />
@@ -59,6 +60,7 @@
         <activity android:name=".Activity.PhoneLoginActivity" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.EditProfileActivity" />
+        <activity android:name=".Activity.FullCollectionActivity"/>
         <activity android:name=".Nav.UserGuideActivity" />
         <activity android:name=".Nav.BookFlightActivity" />
         <activity android:name=".Nav.ChangeAvatarActivity" />

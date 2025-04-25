@@ -19,4 +19,11 @@
     <string name="or_continue_with">Tiếp tục với</string>
     <string name="dont_have_account">Chưa có tài khoản? Đăng kí ngay</string>
     <string name="sign_up">Đăng kí</string>
+    <string name="addExp">"Thêm "</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="collection">Bộ sưu tập</string>
+    <string name="travel_process">Hành trình du lịch</string>
+    <string name="my_wallet">Phương thức thanh toán</string>
+    <string name="username_placeholder">Tên người dùng</string>
+    <string name="collection_preview_image_description">Ảnh xem trước trong bộ sưu tập</string>
 </resources>
