@@ -17,11 +17,14 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.uilover.project1992.Model.Flight;
 import com.uilover.project1992.R;
 import com.uilover.project1992.databinding.ActivityTicketDetailBinding;
 
+import java.lang.reflect.Type;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class TicketDetailActivity extends BaseActivity {
@@ -39,45 +42,55 @@ public class TicketDetailActivity extends BaseActivity {
 
 
         binding.confirmButton.setOnClickListener(v -> {
-            Log.d("TicketDetailActivity", "Confirm button clicked");
+            sendNotification();
+            // Lưu chuyến bay vào MyOrder (SharedPreferences)
+            SharedPreferences sharedPreferences = getSharedPreferences("MyOrders", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            // Lưu chuyến bay vào Firebase
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("notifications");
-            String id = ref.push().getKey();
-            ref.child(id).setValue(flight);
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("orderList", "[]"); // Nếu chưa có thì là mảng rỗng
+            Type type = new TypeToken<ArrayList<Flight>>() {}.getType();
+            ArrayList<Flight> orders = gson.fromJson(json, type);
 
-            // Tạo intent mở TicketDetail khi nhấn thông báo
-            Intent intent = new Intent(this, TicketDetailActivity.class);
-            intent.putExtra("flight", flight);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            orders.add(flight); // thêm chuyến mới
+            String updatedJson = gson.toJson(orders);
+            editor.putString("orderList", updatedJson);
+            editor.apply();
+            startActivity(new Intent(TicketDetailActivity.this, MainActivity.class));
+            finish();
+        });
+    }
 
-            // Tạo thông báo
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
-                    .setSmallIcon(R.drawable.ic_notification)
-                    .setContentTitle("Đặt vé thành công")
-                    .setContentText("Bạn đã đặt vé: " + flight.getAirlineName())
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent);
+    private  void sendNotification(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("notifications");
+        String id = ref.push().getKey();
+        ref.child(id).setValue(flight);
 
-            NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+        // Tạo intent mở TicketDetail khi nhấn thông báo
+        Intent intent = new Intent(this, TicketDetailActivity.class);
+        intent.putExtra("flight", flight);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-                } else {
-                    manager.notify(1001, builder.build());
-                }
+        // Tạo thông báo
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle("Đặt vé thành công")
+                .setContentText("Bạn đã đặt vé: " + flight.getAirlineName())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
             } else {
                 manager.notify(1001, builder.build());
             }
-
-            // Dù gì cũng quay lại MainActivity
-            Log.d("TicketDetailActivity", "Going back to MainActivity");
-            startActivity(new Intent(TicketDetailActivity.this, MainActivity.class));
-            finish();
-            Log.d("TicketDetailActivity", "finish() called");
-        });
+        } else {
+            manager.notify(1001, builder.build());
+        }
     }
 
     private void setVariable() {
