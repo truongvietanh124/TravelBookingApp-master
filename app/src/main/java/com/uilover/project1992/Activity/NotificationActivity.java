@@ -7,83 +7,82 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.uilover.project1992.Adapter.NotificationAdapter;
 import com.uilover.project1992.Model.Flight;
 import com.uilover.project1992.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NotificationActivity extends AppCompatActivity {
     private ImageButton imageButton;
-    private Button notificationButton;
-    private TextView noNotificationText;
+    private RecyclerView recyclerView;
+    private NotificationAdapter adapter;
+    private List<Flight> flightList = new ArrayList<>();
+
+    ImageButton buttonClear ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
 
-        // Ánh xạ các view
-        noNotificationText = findViewById(R.id.noNotificationText);
-        notificationButton = findViewById(R.id.notificationButton);
+        recyclerView = findViewById(R.id.recyclerView);
         imageButton = findViewById(R.id.buttonBack);
+        buttonClear = findViewById(R.id.buttonClear);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new NotificationAdapter(flightList, this);
+        recyclerView.setAdapter(adapter);
 
-        SharedPreferences prefs = getSharedPreferences("notifications", MODE_PRIVATE);
-        String json = prefs.getString("flight_data", null);
+        FirebaseDatabase.getInstance().getReference("notifications")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        flightList.clear();
+                        for (DataSnapshot data : snapshot.getChildren()) {
+                            Flight flight = data.getValue(Flight.class);
+                            flightList.add(flight);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
 
-        if (json != null) {
-            Gson gson = new Gson();
-            Flight flight = gson.fromJson(json, Flight.class);
-
-            String message = "Bạn đã đặt thành công vé máy bay: " +
-                    flight.getAirlineName() +
-                    ", Ghế: " + flight.getPassenger() +
-                    ", Ngày: " + flight.getDate();
-
-            notificationButton.setText(message);
-            notificationButton.setVisibility(View.VISIBLE);
-            noNotificationText.setVisibility(View.GONE);
-
-            notificationButton.setOnClickListener(v -> {
-                Intent intent = new Intent(NotificationActivity.this, TicketDetailActivity.class);
-                intent.putExtra("flight", flight); // Gửi lại toàn bộ đối tượng flight
-                startActivity(intent);
-            });
-        } else {
-            // Không có dữ liệu
-            notificationButton.setVisibility(View.GONE);
-            noNotificationText.setVisibility(View.VISIBLE);
-        }
-
-//        SharedPreferences prefs = getSharedPreferences("notifications", MODE_PRIVATE);
-//        String message = prefs.getString("last_notification", null);
-//
-//        if (message != null) {
-//            noNotificationText.setVisibility(View.GONE);
-//            notificationButton.setVisibility(View.VISIBLE);
-//            notificationButton.setText(message);
-//
-//            notificationButton.setOnClickListener(v -> {
-//                // Mở TicketDetailActivity khi bấm vào thông báo
-//                Intent intent = new Intent(NotificationActivity.this, TicketDetailActivity.class);
-//                intent.putExtra("flightName", prefs.getString("flightName", ""));
-//                intent.putExtra("seat", prefs.getString("seat", ""));
-//                intent.putExtra("date", prefs.getString("date", ""));
-//                startActivity(intent);
-//            });
-//        } else {
-//            noNotificationText.setVisibility(View.VISIBLE);
-//            notificationButton.setVisibility(View.GONE);
-//        }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
 
         // Xử lý nút quay lại
         imageButton.setOnClickListener(v -> {
             Intent intent = new Intent(NotificationActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
+        });
+
+        buttonClear.setOnClickListener(v -> {
+            // Xóa toàn bộ dữ liệu trong node "notifications"
+            FirebaseDatabase.getInstance().getReference("notifications").removeValue()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(this, "Đã xóa tất cả thông báo", Toast.LENGTH_SHORT).show();
+                            flightList.clear();            // Xóa trong danh sách local
+                            adapter.notifyDataSetChanged(); // Cập nhật RecyclerView
+                        } else {
+                            Toast.makeText(this, "Lỗi khi xóa thông báo", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
     }
 }
