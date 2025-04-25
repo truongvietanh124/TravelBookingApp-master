@@ -16,8 +16,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.uilover.project1992.Adapter.ExperienceAdapter;
 import com.uilover.project1992.Model.Experience;
+import com.uilover.project1992.Nav.UserGuideActivity;
+import com.uilover.project1992.R;
 import com.uilover.project1992.databinding.ActivityFeedBinding;
 
 import java.util.ArrayList;
@@ -46,6 +49,7 @@ public class FeedActivity extends AppCompatActivity implements ExperienceAdapter
 
         // Load data from Firebase
         loadExperiences();
+        setupBottomNav();
     }
 
     private void setupRecyclerView() {
@@ -66,6 +70,43 @@ public class FeedActivity extends AppCompatActivity implements ExperienceAdapter
         }
 
         binding.recyclerView.setAdapter(adapter);
+    }
+    private void setupBottomNav() {
+        // ChipNavigationBar bottomNav = findViewById(R.id.bottom_nav); // Nếu không có trong binding
+        // Nên dùng binding nếu bottom_nav nằm trực tiếp trong activity_main.xml
+        ChipNavigationBar bottomNav = binding.bottomNav; // Giả sử ID là bottomNav trong binding
+
+        bottomNav.setOnItemSelectedListener(id -> { // Dùng lambda cho ngắn gọn
+            if (id == R.id.home) {
+                Intent intent;
+                intent = new Intent(FeedActivity.this, MainActivity.class);
+                startActivity(intent);
+                // Xử lý Explorer (ví dụ: mở Activity/Fragment mới)
+                // Toast.makeText(this, "Explorer Clicked", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.explorer) {
+
+            } else if (id == R.id.bookmark) {
+                // Xử lý Bookmark
+                startActivity(new Intent(FeedActivity.this, UserGuideActivity.class));
+                // Toast.makeText(this, "Bookmark Clicked", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.profile) {
+                Intent intent; // Khai báo Intent trong khối lệnh
+                if (isLoggedIn()) { // Kiểm tra trạng thái đăng nhập
+                    intent = new Intent(FeedActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(FeedActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        // Có thể đặt mục được chọn mặc định nếu muốn
+        // bottomNav.setItemSelected(R.id.home, true);
+    }
+    private boolean isLoggedIn() {
+        // Có thể dùng biến currentUser đã lấy ở onCreate cho hiệu quả hơn
+        // return currentUser != null;
+        return FirebaseAuth.getInstance().getCurrentUser() != null; // Giữ nguyên nếu logic cũ cần
     }
 
     @Override
