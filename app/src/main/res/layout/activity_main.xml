@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="90dp"
         >
 
         <LinearLayout
@@ -86,7 +87,8 @@
                 android:elevation="3dp"
                 android:layout_margin="24dp"
                 android:padding="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="80dp">
 
                 <TextView
                     android:id="@+id/textView6"
