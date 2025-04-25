@@ -69,16 +69,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
 
         // Like count
         int likeCount = experience.getLikes() != null ? experience.getLikes().size() : 0;
-        holder.binding.btnLike.setText(String.valueOf(likeCount));
-
-        // Comment count
-        int commentCount = experience.getComments() != null ? experience.getComments().size() : 0;
-        holder.binding.btnComment.setText(String.valueOf(commentCount));
-
-        // Rating
-        float rating = experience.getRating();
-        holder.binding.ratingBar.setRating(rating);
-        holder.binding.tvRating.setText(String.format(Locale.getDefault(), "%.1f", rating));
+        holder.binding.tvLikeCount.setText(String.valueOf(likeCount));
 
         // Load image
         Glide.with(context)

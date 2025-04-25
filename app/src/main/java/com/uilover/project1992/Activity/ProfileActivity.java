@@ -49,8 +49,6 @@ public class ProfileActivity extends AppCompatActivity {
     private ValueEventListener experiencePreviewListener;
     private Query userExperiencesQuery;
 
-    private LinearLayout myOrderLayout ;
-
     private static final String TAG = "ProfileActivity"; // Tag cho Log
 
     @Override
@@ -65,13 +63,6 @@ public class ProfileActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         rtDb = FirebaseDatabase.getInstance();
         currentUser = mAuth.getCurrentUser();
-        myOrderLayout = findViewById(R.id.openOrder);
-
-        myOrderLayout.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, MyOrderActivity.class);
-            startActivity(intent);
-        });
-
 
         // --- Cài đặt RecyclerView cho ảnh Preview ---
         // Phải gọi trước khi load data để adapter sẵn sàng

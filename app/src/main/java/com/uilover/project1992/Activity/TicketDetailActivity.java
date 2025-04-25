@@ -1,31 +1,18 @@
 package com.uilover.project1992.Activity;
 
-import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.uilover.project1992.Model.Flight;
-import com.uilover.project1992.R;
 import com.uilover.project1992.databinding.ActivityTicketDetailBinding;
 
-import java.lang.reflect.Type;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Locale;
+
+
 
 public class TicketDetailActivity extends BaseActivity {
     private ActivityTicketDetailBinding binding;
@@ -42,55 +29,25 @@ public class TicketDetailActivity extends BaseActivity {
 
 
         binding.confirmButton.setOnClickListener(v -> {
-            sendNotification();
-            // Lưu chuyến bay vào MyOrder (SharedPreferences)
-            SharedPreferences sharedPreferences = getSharedPreferences("MyOrders", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+            SharedPreferences prefs = getSharedPreferences("notifications", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
 
+            // Chuyển flight sang JSON
             Gson gson = new Gson();
-            String json = sharedPreferences.getString("orderList", "[]"); // Nếu chưa có thì là mảng rỗng
-            Type type = new TypeToken<ArrayList<Flight>>() {}.getType();
-            ArrayList<Flight> orders = gson.fromJson(json, type);
+            String flightJson = gson.toJson(flight);
 
-            orders.add(flight); // thêm chuyến mới
-            String updatedJson = gson.toJson(orders);
-            editor.putString("orderList", updatedJson);
+            // Lưu dữ liệu
+            editor.putString("last_notification", "Bạn đã đặt thành công vé máy bay!");
+            editor.putString("flight_data", flightJson);
             editor.apply();
-            startActivity(new Intent(TicketDetailActivity.this, MainActivity.class));
+
+            // Quay lại MainActivity
+            Intent intent = new Intent(TicketDetailActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         });
-    }
 
-    private  void sendNotification(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("notifications");
-        String id = ref.push().getKey();
-        ref.child(id).setValue(flight);
 
-        // Tạo intent mở TicketDetail khi nhấn thông báo
-        Intent intent = new Intent(this, TicketDetailActivity.class);
-        intent.putExtra("flight", flight);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-        // Tạo thông báo
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle("Đặt vé thành công")
-                .setContentText("Bạn đã đặt vé: " + flight.getAirlineName())
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
-
-        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-            } else {
-                manager.notify(1001, builder.build());
-            }
-        } else {
-            manager.notify(1001, builder.build());
-        }
     }
 
     private void setVariable() {
