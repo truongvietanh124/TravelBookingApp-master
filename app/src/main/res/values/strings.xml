@@ -67,7 +67,7 @@
     <string name="toShort">to</string>
     <string name="username" translatable="false">Email</string>
     <!-- Common -->
-    <string name="app_name" translatable="false">My App</string>
+    <string name="app_name" translatable="false">Airtravel</string>
     <string name="background_image" translatable="false">Background image</string>
     <string name="app_logo" translatable="false">App logo</string>
 
