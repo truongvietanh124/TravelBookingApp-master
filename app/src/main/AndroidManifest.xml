@@ -19,7 +19,8 @@
             android:exported="false" />
         <activity
             android:name=".Activity.FeedActivity"
-            android:exported="false" />
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"/>
         <activity
             android:name=".Activity.ExploreActivity"
             android:exported="false" />
