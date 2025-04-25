@@ -4,67 +4,164 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/white">
 
+    android:background="@color/background_color">
+
+    <!-- AppBar với CollapsingToolbarLayout cải tiến -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.Material3.Dark">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="320dp"
+            app:collapsedTitleTextAppearance="@style/CollapsedAppBarTitle"
+            app:contentScrim="@color/primary_color"
+            app:expandedTitleMarginBottom="28dp"
+            app:expandedTitleMarginStart="16dp"
+            app:expandedTitleTextAppearance="@style/ExpandedAppBarTitle"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@color/primary_color"
+            app:titleEnabled="true">
 
-            <ImageView
-                android:id="@+id/imageExperience"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
+
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageExperience"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Ảnh trải nghiệm"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Lớp gradient để cải thiện độ tương phản cho chữ và toolbar -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/image_gradient_scrim"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <!-- Thẻ location -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:alpha="0.9"
+                    android:text="Hà Nội, Việt Nam"
+                    android:textColor="@color/primary_color"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipIcon="@drawable/ic_location"
+                    app:chipIconTint="@color/primary_color"
+                    app:chipStartPadding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:navigationIcon="@drawable/ic_back"
+                app:popupTheme="@style/ThemeOverlay.Material3.Light">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSave"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="4dp"
+                        app:backgroundTint="#80000000"
+                        app:cornerRadius="24dp"
+                        app:icon="@drawable/ic_bookmark"
+                        app:iconTint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnShare"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="8dp"
+                        app:backgroundTint="#80000000"
+                        app:cornerRadius="24dp"
+                        app:icon="@drawable/ic_share"
+                        app:iconTint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnSave"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Nội dung cuộn -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <androidx.cardview.widget.CardView
+            <!-- Thông tin chính và mô tả -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardMainInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeWidth="0dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <TextView
                         android:id="@+id/textTitle"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
                         android:textColor="@color/black"
                         android:textSize="24sp"
+
                         android:textStyle="bold"
                         tools:text="@string/preview_title" /> <LinearLayout
                     android:layout_width="match_parent"
@@ -72,10 +169,29 @@
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Khám phá Hang Sơn Đoòng - Trải nghiệm không thể quên" />
+
+                    <!-- Thông tin người dùng & thời gian -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imageUserAvatar"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textTitle"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        tools:src="@tools:sample/avatars" />
+
+
                     <TextView
                         android:id="@+id/textUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="italic"
@@ -93,35 +209,90 @@
                         android:textSize="14sp"
                         tools:text="@string/preview_timestamp" /> </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/imageUserAvatar"
+                        app:layout_constraintTop_toTopOf="@id/imageUserAvatar"
+                        tools:text="Nguyễn Văn A" />
+
+
+                    <TextView
+                        android:id="@+id/textTimestamp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/imageUserAvatar"
+                        app:layout_constraintStart_toEndOf="@id/imageUserAvatar"
+                        tools:text="12 tháng 4, 2025" />
+
+                    <!-- Đánh giá -->
+                    <LinearLayout
+                        android:id="@+id/layoutRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/bg_rating_container"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageUserAvatar">
 
                         <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="center_vertical"
+
                             android:src="@drawable/ic_location" />
 
+                            android:contentDescription="Icon đánh giá"
+                            android:src="@drawable/ic_star"
+                            app:tint="@color/rating_color" />
+
                         <TextView
-                            android:id="@+id/textLocation"
+                            android:id="@+id/textRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="6dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            tools:text="4.5" />
+
+
+                        <TextView
+                            android:id="@+id/textRatingCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="4dp"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp"
+
                             tools:text="@string/preview_location" /> </LinearLayout>
 
+                            tools:text="(128)" />
+                    </LinearLayout>
+
+
+                    <!-- Mô tả -->
                     <TextView
                         android:id="@+id/textDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:lineSpacingExtra="4dp"
-                        android:textColor="@color/black"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/roboto"
+                        android:lineSpacingMultiplier="1.4"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp"
+
                         tools:text="@string/preview_description" /> <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -164,45 +335,230 @@
                 </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layoutRating"
+                        tools:text="Hang Sơn Đoòng, được phát hiện vào năm 2009, là hang động lớn nhất thế giới. Nằm trong Vườn quốc gia Phong Nha - Kẻ Bàng, Quảng Bình, hang có hệ thống thạch nhũ độc đáo và một hệ sinh thái riêng biệt. Trải nghiệm khám phá Sơn Đoòng là cơ hội hiếm có để chiêm ngưỡng vẻ đẹp kỳ vĩ của thiên nhiên..." />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
+                    <!-- Các nút tương tác -->
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/comment_section_title" android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_height="1dp"
+                        android:layout_marginTop="24dp"
+                        app:dividerColor="@color/divider_color"
+                        app:layout_constraintTop_toBottomOf="@id/textDescription" />
 
                     <LinearLayout
+                        android:id="@+id/layoutInteractions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/divider">
 
-                        <EditText
-                            android:id="@+id/editTextComment"
-                            android:layout_width="0dp"
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnLike"
+                            style="@style/Widget.Material3.Button.TextButton.Icon"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="128"
+                            android:textColor="@color/text_secondary"
+                            app:icon="@drawable/ic_like"
+                            app:iconGravity="textStart"
+                            app:iconPadding="8dp"
+                            app:iconTint="@color/text_secondary" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnComment"
+                            style="@style/Widget.Material3.Button.TextButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="42"
+                            android:textColor="@color/text_secondary"
+                            app:icon="@drawable/ic_comment"
+                            app:iconGravity="textStart"
+                            app:iconPadding="8dp"
+                            app:iconTint="@color/text_secondary" />
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Phần đánh giá -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardMainInfo"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textRatingTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="@string/comment_section_title" android:textColor="@color/black"
+
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Đánh giá của bạn"
+                        android:textColor="@color/black"
+
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBarInput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:isIndicator="false"
+                        android:numStars="5"
+                        android:progressBackgroundTint="@color/rating_background"
+                        android:progressTint="@color/rating_color"
+                        android:rating="0"
+                        android:secondaryProgressTint="@color/rating_color"
+                        android:stepSize="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textRatingTitle" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutRating"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Chia sẻ cảm nhận của bạn (tùy chọn)"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ratingBarInput">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextRatingComment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:inputType="textMultiLine"
+                            android:lines="3"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSubmitRating"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:paddingHorizontal="24dp"
+                        android:text="Gửi đánh giá"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/primary_color"
+                        app:cornerRadius="24dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textInputLayoutRating" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Phần bình luận -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardRating"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textCommentsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Bình luận"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textCommentCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/textCommentsTitle"
+                        app:layout_constraintStart_toEndOf="@id/textCommentsTitle"
+                        app:layout_constraintTop_toTopOf="@id/textCommentsTitle"
+                        tools:text="(42)" />
+
+                    <!-- Input bình luận -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutComment"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:hint="Viết bình luận..."
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toStartOf="@+id/btnSendComment"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textCommentsTitle">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextComment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
                             android:layout_weight="1"
                             android:background="@drawable/bg_comment_input"
                             android:hint="@string/comment_input_hint" android:inputType="textMultiLine"
+
+                            android:inputType="textMultiLine"
+
                             android:maxLines="3"
-                            android:padding="12dp"
                             android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                         <ImageButton
                             android:id="@+id/buttonSendComment"
@@ -217,17 +573,53 @@
 
                     </LinearLayout>
 
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btnSendComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Gửi bình luận"
+                        app:backgroundTint="@color/primary_color"
+                        app:fabSize="mini"
+                        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutComment"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textInputLayoutComment"
+                        app:srcCompat="@drawable/ic_send"
+                        app:tint="@color/white" />
+
+                    <!-- Danh sách bình luận -->
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerComments"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="20dp"
                         android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutComment"
                         tools:itemCount="3"
                         tools:listitem="@layout/item_comment" />
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+                    <!-- Nút xem thêm bình luận -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnViewAllComments"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Xem tất cả bình luận"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recyclerComments" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

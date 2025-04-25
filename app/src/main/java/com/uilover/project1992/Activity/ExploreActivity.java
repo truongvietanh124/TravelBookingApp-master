@@ -21,7 +21,6 @@ import com.uilover.project1992.databinding.ActivityExploreBinding;
 import java.util.UUID;
 
 public class ExploreActivity extends AppCompatActivity {
-
     private ActivityExploreBinding binding;
     private static final int PICK_IMAGE_REQUEST = 71;
     private Uri imageUri;
@@ -62,7 +61,6 @@ public class ExploreActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
             binding.imagePreview.setImageURI(imageUri);
@@ -74,6 +72,7 @@ public class ExploreActivity extends AppCompatActivity {
         String title = binding.etTitle.getText().toString().trim();
         String experienceText = binding.etExperience.getText().toString().trim();
         String location = binding.etLocation.getText().toString().trim();
+        float rating = 0;
 
         if (title.isEmpty() || experienceText.isEmpty() || location.isEmpty() || imageUri == null) {
             Toast.makeText(this, "Vui lòng điền đủ thông tin và chọn ảnh", Toast.LENGTH_SHORT).show();
@@ -89,6 +88,7 @@ public class ExploreActivity extends AppCompatActivity {
         storageRef.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot ->
                         storageRef.getDownloadUrl().addOnSuccessListener(downloadUri -> {
+                            // Tạo đối tượng Experience với constructor đầy đủ, bao gồm rating
                             Experience experience = new Experience(
                                     experienceId,
                                     title,
@@ -99,7 +99,8 @@ public class ExploreActivity extends AppCompatActivity {
                                     auth.getCurrentUser() != null && auth.getCurrentUser().getEmail() != null
                                             ? auth.getCurrentUser().getEmail()
                                             : "Email not available",
-                                    System.currentTimeMillis()
+                                    System.currentTimeMillis(),
+                                    rating // Thêm rating vào constructor
                             );
 
                             database.getReference().child("experiences").child(experienceId)

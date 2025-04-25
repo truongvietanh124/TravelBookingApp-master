@@ -1,20 +1,26 @@
 package com.uilover.project1992.Activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.uilover.project1992.Adapter.ExperienceAdapter;
 import com.uilover.project1992.Model.Experience;
+import com.uilover.project1992.Nav.UserGuideActivity;
+import com.uilover.project1992.R;
 import com.uilover.project1992.databinding.ActivityFeedBinding;
 
 import java.util.ArrayList;
@@ -22,7 +28,6 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class FeedActivity extends AppCompatActivity implements ExperienceAdapter.OnExperienceClickListener {
-
     private ActivityFeedBinding binding;
     private ExperienceAdapter adapter;
     private final ArrayList<Experience> experienceList = new ArrayList<>();
@@ -35,10 +40,8 @@ public class FeedActivity extends AppCompatActivity implements ExperienceAdapter
         binding = ActivityFeedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Initialize RecyclerView
-        adapter = new ExperienceAdapter(this, experienceList, this);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setAdapter(adapter);
+        // Initialize RecyclerView with proper layout manager based on orientation
+        setupRecyclerView();
 
         // Set up floating action button for posting new experience
         binding.fabAddExperience.setOnClickListener(v ->
@@ -46,25 +49,114 @@ public class FeedActivity extends AppCompatActivity implements ExperienceAdapter
 
         // Load data from Firebase
         loadExperiences();
+        setupBottomNav();
+    }
+
+    private void setupRecyclerView() {
+        adapter = new ExperienceAdapter(this, experienceList, this);
+
+        // Set layout manager based on current orientation
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Use GridLayoutManager with more columns in landscape mode
+            GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+            binding.recyclerView.setLayoutManager(layoutManager);
+            // Optionally shrink FAB in landscape mode
+            binding.fabAddExperience.shrink();
+        } else {
+            // Use LinearLayoutManager in portrait mode (or GridLayoutManager with fewer columns)
+            binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            // Ensure FAB is extended in portrait mode
+            binding.fabAddExperience.extend();
+        }
+
+        binding.recyclerView.setAdapter(adapter);
+    }
+    private void setupBottomNav() {
+        // ChipNavigationBar bottomNav = findViewById(R.id.bottom_nav); // Nếu không có trong binding
+        // Nên dùng binding nếu bottom_nav nằm trực tiếp trong activity_main.xml
+        ChipNavigationBar bottomNav = binding.bottomNav; // Giả sử ID là bottomNav trong binding
+
+        bottomNav.setOnItemSelectedListener(id -> { // Dùng lambda cho ngắn gọn
+            if (id == R.id.home) {
+                Intent intent;
+                intent = new Intent(FeedActivity.this, MainActivity.class);
+                startActivity(intent);
+                // Xử lý Explorer (ví dụ: mở Activity/Fragment mới)
+                // Toast.makeText(this, "Explorer Clicked", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.explorer) {
+
+            } else if (id == R.id.bookmark) {
+                // Xử lý Bookmark
+                startActivity(new Intent(FeedActivity.this, UserGuideActivity.class));
+                // Toast.makeText(this, "Bookmark Clicked", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.profile) {
+                Intent intent; // Khai báo Intent trong khối lệnh
+                if (isLoggedIn()) { // Kiểm tra trạng thái đăng nhập
+                    intent = new Intent(FeedActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(FeedActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        // Có thể đặt mục được chọn mặc định nếu muốn
+        // bottomNav.setItemSelected(R.id.home, true);
+    }
+    private boolean isLoggedIn() {
+        // Có thể dùng biến currentUser đã lấy ở onCreate cho hiệu quả hơn
+        // return currentUser != null;
+        return FirebaseAuth.getInstance().getCurrentUser() != null; // Giữ nguyên nếu logic cũ cần
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Save current scroll position
+        int scrollPosition = 0;
+        RecyclerView.LayoutManager layoutManager = binding.recyclerView.getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            scrollPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        }
+
+        // Update layout based on new orientation
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Use GridLayoutManager with more columns in landscape mode
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+            binding.recyclerView.setLayoutManager(gridLayoutManager);
+            // Shrink FAB to save space
+            binding.fabAddExperience.shrink();
+        } else {
+            // Use LinearLayoutManager in portrait mode
+            binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            // Extend FAB to show text
+            binding.fabAddExperience.extend();
+        }
+
+        // Restore scroll position
+        if (layoutManager instanceof LinearLayoutManager) {
+            ((LinearLayoutManager) binding.recyclerView.getLayoutManager()).scrollToPosition(scrollPosition);
+        }
+
+        // Notify adapter to refresh
+        adapter.notifyDataSetChanged();
     }
 
     private void loadExperiences() {
-        binding.progressBar.setVisibility(View.VISIBLE);
-
+        binding.loadingContainer.setVisibility(View.VISIBLE);
         database.getReference().child("experiences")
                 .orderByChild("timestamp")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         experienceList.clear();
-
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Experience experience = dataSnapshot.getValue(Experience.class);
                             if (experience != null) {
                                 experienceList.add(experience);
                             }
                         }
-
                         // Sort by timestamp (newest first)
                         Collections.sort(experienceList, new Comparator<Experience>() {
                             @Override
@@ -72,23 +164,28 @@ public class FeedActivity extends AppCompatActivity implements ExperienceAdapter
                                 return Long.compare(o2.getTimestamp(), o1.getTimestamp());
                             }
                         });
-
                         adapter.notifyDataSetChanged();
-                        binding.progressBar.setVisibility(View.GONE);
-                        binding.tvEmptyState.setVisibility(experienceList.isEmpty() ? View.VISIBLE : View.GONE);
+                        binding.loadingContainer.setVisibility(View.GONE);
+
+                        // Show empty state if no experiences
+                        if (experienceList.isEmpty()) {
+                            binding.emptyStateContainer.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.emptyStateContainer.setVisibility(View.GONE);
+                        }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        binding.progressBar.setVisibility(View.GONE);
+                        binding.loadingContainer.setVisibility(View.GONE);
                     }
                 });
     }
 
     @Override
     public void onExperienceClick(Experience experience) {
-      Intent intent = new Intent(this, ExperienceDetailActivity.class);
-       intent.putExtra("EXPERIENCE_ID", experience.getId());
+        Intent intent = new Intent(this, ExperienceDetailActivity.class);
+        intent.putExtra("EXPERIENCE_ID", experience.getId());
         startActivity(intent);
     }
 
@@ -122,9 +219,8 @@ public class FeedActivity extends AppCompatActivity implements ExperienceAdapter
 
     @Override
     public void onCommentClick(Experience experience) {
-    //    Intent intent = new Intent(this, CommentActivity.class);
-      //  intent.putExtra("EXPERIENCE_ID", experience.getId());
-     //   startActivity(intent);
+        // Intent intent = new Intent(this, CommentActivity.class);
+        // intent.putExtra("EXPERIENCE_ID", experience.getId());
+        // startActivity(intent);
     }
-
 }

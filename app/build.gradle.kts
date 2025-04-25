@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
+    implementation("com.google.android.material:material:1.11.0")
     // Firebase
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation ("com.google.firebase:firebase-storage-ktx")
@@ -63,6 +64,7 @@ dependencies {
     // Glide để load ảnh
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     implementation(libs.swiperefreshlayout)
+    implementation(libs.firebase.messaging)
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
     // CircleImageView để hiển thị avatar tròn
@@ -76,6 +78,7 @@ dependencies {
     implementation ("com.google.android.material:material:your_material_version")
     implementation ("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation ("com.google.firebase:firebase-messaging:24.1.1")
 
 
 
