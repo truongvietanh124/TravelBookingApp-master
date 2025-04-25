@@ -6,27 +6,28 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     tools:context=".Activity.FeedActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="0dp"
             app:titleTextAppearance="@style/ToolbarTitleStyle"
-            app:title="Trải nghiệm">
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="8dp"
-                app:queryHint="Tìm kiếm"
-                app:iconifiedByDefault="true" />
+            app:title="@string/experience_toolbar_title"> <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            app:queryHint="@string/search_hint" app:iconifiedByDefault="true" />
         </com.google.android.material.appbar.MaterialToolbar>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -38,11 +39,13 @@
             app:tabIndicatorHeight="3dp"
             app:tabTextAppearance="@style/TabTextAppearance" />
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -54,6 +57,7 @@
             tools:listitem="@layout/item_experience" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <LinearLayout
         android:id="@+id/emptyStateContainer"
         android:layout_width="match_parent"
@@ -63,33 +67,34 @@
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/ic_empty_state"
-            android:contentDescription="Không có dữ liệu" />
-        <TextView
-            android:id="@+id/tvEmptyState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Chưa có bài trải nghiệm nào"
-            android:textColor="@color/gray_text"
-            android:textSize="18sp" />
+            android:contentDescription="@string/empty_state_image_description" /> <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/empty_state_message" android:textColor="@color/gray_text"
+        android:textSize="18sp" />
+
         <Button
             android:id="@+id/btnRefresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Làm mới"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            android:text="@string/refresh_button" style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/loadingContainer"
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -99,6 +104,7 @@
             app:indicatorColor="@color/primary_color"
             app:trackColor="@color/light_gray" />
     </FrameLayout>
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabAddExperience"
         android:layout_width="wrap_content"
@@ -106,13 +112,10 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:textColor="@color/white"
-        android:contentDescription="Thêm trải nghiệm mới"
-        android:text="@string/addExp"
-        app:icon="@drawable/ic_add"
+        android:contentDescription="@string/fab_add_experience_description" android:text="@string/addExp" app:icon="@drawable/ic_add"
         app:iconTint="@color/white"
         app:backgroundTint="@color/primary_color" />
 
-    <!-- Di chuyển ChipNavigationBar xuống dưới cùng của layout -->
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"

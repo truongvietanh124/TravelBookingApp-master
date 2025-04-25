@@ -65,24 +65,25 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/name"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"/>
+
+        <!-- Birthdate -->
         <EditText
             android:id="@+id/edt_name"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/edittext_bg"
-            android:hint="Enter your name"
+            android:hint="@string/FillName"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
 
-        <!-- Birthdate -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Birthdate"
+            android:text="@string/birthday"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"/>
@@ -101,7 +102,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hometown"
+            android:text="@string/hometown"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"/>
@@ -109,7 +110,7 @@
             android:id="@+id/edt_hometown"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Enter hometown"
+            android:hint="@string/FillHometown"
             android:background="@drawable/edittext_bg"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
@@ -123,7 +124,7 @@
             android:layout_marginBottom="32dp"
             android:backgroundTint="#0075F1"
             android:fontFamily="sans-serif-medium"
-            android:text="Save Changes"
+            android:text="@string/save"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </ScrollView>

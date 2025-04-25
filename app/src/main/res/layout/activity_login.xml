@@ -4,21 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Ảnh nền với lớp phủ tối -->
-    <!--<ImageView
-        android:id="@+id/bgImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_login"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"/>
-    -->
-    <!-- Nội dung chính -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,15 +17,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Logo -->
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="190dp"
                 android:layout_marginBottom="24dp"
                 android:src="@drawable/logo_white"
-                 />
+                android:contentDescription="@null" />
 
-            <!-- Username -->
             <EditText
                 android:id="@+id/editTextUsername"
                 android:layout_width="match_parent"
@@ -54,7 +37,6 @@
                 android:textColorHint="#CCCCCC"
                 android:maxLines="1"/>
 
-            <!-- Password -->
             <EditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
@@ -69,7 +51,6 @@
                 android:textColorHint="#CCCCCC"
                 android:maxLines="1"/>
 
-            <!-- Sign In Button -->
             <Button
                 android:id="@+id/btnSignIn"
                 android:layout_width="match_parent"
@@ -82,7 +63,6 @@
                 android:textStyle="bold"
                 android:stateListAnimator="@null"/>
 
-            <!-- Forgot password -->
             <TextView
                 android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
@@ -96,7 +76,6 @@
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
-            <!-- Login with social -->
             <TextView
                 android:id="@+id/tvLoginWithSocial"
                 android:layout_width="match_parent"
@@ -109,7 +88,6 @@
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
-            <!-- Social icons -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,8 +102,7 @@
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-
-                    android:scaleType="centerInside"
+                    android:contentDescription="@string/facebook_login_description" android:scaleType="centerInside"
                     android:src="@drawable/ic_facebook"
                     app:tint="@null" />
 
@@ -135,8 +112,7 @@
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-
-                    android:scaleType="centerInside"
+                    android:contentDescription="@string/google_login_description" android:scaleType="centerInside"
                     android:src="@drawable/ic_googleplus"
                     app:tint="@null" />
 
@@ -146,8 +122,7 @@
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-
-                    android:scaleType="centerInside"
+                    android:contentDescription="@string/twitter_login_description" android:scaleType="centerInside"
                     android:src="@drawable/ic_twitter"
                     app:tint="@null" />
 
@@ -157,8 +132,7 @@
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-
-                    android:scaleType="centerInside"
+                    android:contentDescription="@string/instagram_login_description" android:scaleType="centerInside"
                     android:src="@drawable/ic_instagram"
                     app:tint="@null" />
             </LinearLayout>
@@ -176,7 +150,6 @@
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
-            <!-- Sign Up Button -->
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"

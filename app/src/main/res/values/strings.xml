@@ -9,10 +9,10 @@
     <string name="back_button" translatable="false">Back</string>
     <string name="profile_title" translatable="false">Profile</string>
     <string name="profile_image" translatable="false">Profile Image</string>
-    <string name="default_user_name" translatable="false">John Doe</string>
+    <string name="default_user_name" translatable="false">User Name</string>
     <string name="settings_button" translatable="false">Settings</string>
     <string name="profile_screen_title" translatable="false">Profile Screen</string>
-    <string name="default_user_email" translatable="false">john.doe@example.com</string>
+    <string name="default_user_email" translatable="false">user@gmail.com</string>
     <string name="login_logout_button">Logout</string>
     <string name="sologan">Travel To 36 Destinations</string>
     <string name="welcome">Welcome </string>
@@ -65,7 +65,7 @@
     <string name="from">from</string>
     <string name="to">to</string>
     <string name="toShort">to</string>
-    <string name="username" translatable="false">Email</string>
+    <string name="username" translatable="false">User Name</string>
     <!-- Common -->
     <string name="app_name" translatable="false">My App</string>
     <string name="background_image" translatable="false">Background image</string>
@@ -102,4 +102,165 @@
     <string name="username_placeholder" >User name</string>
     <string name="user_email_placeholder" translatable="false">Email</string>
     <string name="collection_preview_image_description" >Preview images</string>
+    <string name="name" >Name</string>
+    <string name="FillName" >Enter Your Name</string>
+    <string name="birthday" >BirthDay</string>
+    <string name="hometown" >Hometown</string>
+    <string name="FillHometown" >Enter Your HomeTown</string>
+    <string name="save" >Save changes</string>
+    <string name="preview_title" >Title</string>
+    <string name="preview_user_name">Person</string>
+    <string name="bullet_separator" >•</string>
+
+    <string name="preview_timestamp" translatable="false">03/03/2003</string>
+    <string name="preview_location" >Loaction</string>
+    <string name="preview_description" >Description</string>
+    <string name="preview_like_count" >36</string>
+    <string name="comment_input_hint" >comment</string>
+    <string name="send_button_description" >send</string>
+    <string name="comment_section_title" >Comment</string>
+    <string name="post_experience_title">Post Experience</string>
+    <string name="select_image_label">Select Image</string>
+    <string name="select_image_button">Choose Image</string>
+    <string name="title_label">Title</string>
+    <string name="title_input_hint">Enter experience title</string>
+    <string name="experience_label">Your Experience</string>
+    <string name="experience_input_hint">Share your experience here...</string>
+    <string name="location_label">Location</string>
+    <string name="location_input_hint">Enter the location</string>
+    <string name="post_button">Post</string>
+    <string name="experience_toolbar_title">Experiences</string>
+    <string name="search_hint">Search</string>
+    <string name="empty_state_image_description">No data</string>
+    <string name="empty_state_message">No experiences yet</string>
+    <string name="refresh_button">Refresh</string>
+    <string name="fab_add_experience_description">Add new experience</string>
+    <string name="empty_collection_message">No posts yet</string>
+    <string name="facebook_login_description">Facebook Login</string>
+    <string name="google_login_description">Google Login</string>
+    <string name="twitter_login_description">Twitter Login</string>
+    <string name="instagram_login_description">Instagram Login</string>
+    <string name="world_image_description">World image</string>
+    <string name="user_avatar_description">User avatar</string>
+    <string name="notifications_icon_description">Notifications icon</string>
+    <string name="main_welcome_message">Let\'s explore the world\n with us!!!</string> <string name="label_from">From</string>
+    <string name="from_icon_description">Departure location icon</string>
+    <string name="label_to">To</string>
+    <string name="to_icon_description">Arrival location icon</string>
+    <string name="passengers_icon_description">Passengers icon</string>
+    <string name="label_minus">-</string>
+    <string name="default_adult_text">1 Adult</string>
+    <string name="label_plus">+</string>
+    <string name="default_child_text">1 Child</string>
+    <string name="label_departure_date">Departure date</string>
+    <string name="calendar_icon_description">Calendar icon</string>
+    <string name="date_placeholder">-</string>
+    <string name="label_return_date">Return date</string>
+    <string name="label_class">Class</string>
+    <string name="seat_icon_description">Seat class icon</string>
+    <string name="back_button_description">Back</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="no_notifications_message">No notifications yet</string>
+    <string name="notification_button_text">Notification</string>
+    <string name="app_logo_description">App Logo</string>
+    <string name="sign_up_title">Sign up</string>
+    <string name="label_email">Email</string>
+    <string name="hint_your_email">Your email</string>
+    <string name="label_password">Password</string>
+    <string name="hint_enter_password">Enter your password</string>
+    <string name="terms_and_policy_acceptance">I accept the terms and privacy policy</string>
+    <string name="sign_up_button">Sign up</string>
+    <string name="or_register_with">Or Register with</string>
+    <string name="register_with_facebook">Register with Facebook</string>
+    <string name="register_with_google">Register with Google</string>
+    <string name="register_with_apple">Register with Apple</string>
+    <string name="already_have_account_prompt">Already have an account?</string>
+    <string name="log_in_link">Log in</string>
+    <string name="world_map_half_description">Half world map</string>
+    <string name="search_result_title">Search Result</string>
+    <string name="choose_seats_title">Choose seats</string>
+    <string name="airplane_seat_map_description">Airplane seat map</string>
+    <string name="seat_status_available">Available</string>
+    <string name="seat_status_selected">Selected</string>
+    <string name="seat_status_unavailable">Unavailable</string> <string name="confirm_seats_button">Confirm Seats</string>
+    <string name="price_placeholder_vnd">0 đ</string> <string name="default_seats_selected">0 Seat Selected</string>
+    <string name="seat_name_placeholder">-</string>
+    <string name="selected_seat_info_icon_description">Selected seat info icon</string>
+    <string name="ticket_detail_title">Ticket Detail</string>
+    <string name="airline_logo_description">Airline logo</string>
+    <string name="label_time_placeholder">time</string> <string name="flight_route_icon_description">Flight route icon</string>
+    <string name="placeholder_from_short">from</string> <string name="label_from_detail">From</string>
+    <string name="text_placeholder">-</string> <string name="label_date">Date</string>
+    <string name="label_to_detail">To</string>
+    <string name="label_time">Time</string>
+    <string name="label_seats">Seats</string>
+    <string name="label_airlines">Airlines</string>
+    <string name="label_price">Price</string>
+    <string name="qr_code_description">QR Code</string>
+    <string name="barcode_description">Barcode</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="faq_title">Frequently Asked Questions</string>
+    <string name="faq_question_book_flight">How to book a flight?</string>
+    <string name="faq_question_change_avatar">How can I change my avatar?</string>
+    <string name="faq_question_register_account">How can I register an account?</string>
+    <string name="faq_question_reset_password">How to reset my password?</string>
+    <string name="faq_question_cancel_flight">How to cancel a flight?</string>
+    <string name="faq_question_contact_support">How do I contact support?</string>
+    <string name="faq_question_booking_history">Where can I see my booking history?</string>
+    <string name="faq_question_create_post">How can I create a post?</string> <string name="hotline_label">Hotline: 1900 123 456</string>
+    <string name="bot_chat_icon_description">Bot Chat</string>
+    <string name="guide_book_flight_title">How to Book a Flight</string>
+    <string name="guide_step1_title">1. Select Departure and Destination</string>
+    <string name="guide_step1_desc">→ Use the dropdown menus to choose cities in the \'From\' and \'To\' fields.</string>
+    <string name="guide_step1_image_desc">Step 1 illustration</string>
+    <string name="guide_step2_title">2. Select Departure and Return Dates</string>
+    <string name="guide_step2_desc">→ Tap on the date fields to open the calendar and pick your dates.</string>
+    <string name="guide_step2_image_desc">Step 2 illustration</string>
+    <string name="guide_step3_title">3. Choose Number of Passengers</string>
+    <string name="guide_step3_desc">→ Use the \'+\' and \'-\' buttons to adjust the number of adults and children.</string>
+    <string name="guide_step3_image_desc">Step 3 illustration</string>
+    <string name="guide_step4_title">4. Select Seat Class</string>
+    <string name="guide_step4_desc">→ Choose from Economy, Business, or First Class.</string>
+    <string name="guide_step4_image_desc">Step 4 illustration</string>
+    <string name="guide_step5_title">5. Tap on \"Search Flights\"</string> <string name="guide_step5_desc">→ The app will search and display available flights that match your criteria.</string>
+    <string name="guide_step5_image_desc">Step 5 illustration</string>
+    <string name="guide_step6_title">6. Choose a Flight</string>
+    <string name="guide_step6_desc">→ Choose a suitable airline and departure time.</string>
+    <string name="guide_step6_image_desc">Step 6 illustration</string>
+    <string name="guide_step7_title">7. Choose a seat</string>
+    <string name="guide_step7_desc">→ Select the seat that\'s right for you</string>
+    <string name="guide_step7_image_desc">Step 7 illustration</string>
+    <string name="guide_change_avatar_title">How to change profile picture</string>
+    <string name="guide_avatar_step1_title">1. Click the profile icon on the navigation bar</string>
+    <string name="guide_avatar_step1_image_desc">Step 1 illustration - Change profile picture</string>
+    <string name="guide_avatar_step2_title">2. Click the settings icon in the top right corner</string>
+    <string name="guide_avatar_step2_image_desc">Step 2 illustration - Change profile picture</string>
+    <string name="guide_avatar_step3_title">3. Click the avatar</string>
+    <string name="guide_avatar_step3_image_desc">Step 3 illustration - Change profile picture</string>
+    <string name="guide_avatar_step4_title">4. Select a profile picture</string>
+    <string name="guide_avatar_step4_image_desc">Step 4 illustration - Change profile picture</string>
+    <string name="guide_avatar_step5_title">5. Click the \"Save Changes\" button</string> <string name="guide_avatar_step5_image_desc">Step 5 illustration - Change profile picture</string>
+    <string name="guide_create_post_title">How to create a post</string>
+    <string name="guide_post_step1_title">1. Click the Explorer icon on the navigation bar</string>
+    <string name="guide_post_step1_image_desc">Step 1 illustration - Create post</string>
+    <string name="guide_post_step2_title">2. Tap the Add New button in the bottom-right corner to create a new post</string>
+    <string name="guide_post_step2_image_desc">Step 2 illustration - Create post</string>
+    <string name="guide_post_step3_title">3. Choose an image to upload</string>
+    <string name="guide_post_step3_image_desc">Step 3 illustration - Create post</string>
+    <string name="guide_post_step4_title">4. Enter the title of the post</string>
+    <string name="guide_post_step4_image_desc">Step 4 illustration - Create post</string>
+    <string name="guide_post_step5_title">5. Enter the description of the post</string>
+    <string name="guide_post_step5_image_desc">Step 5 illustration - Create post</string>
+    <string name="guide_post_step6_title">6. Enter the location of the post</string>
+    <string name="guide_post_step6_image_desc">Step 6 illustration - Create post</string>
+    <string name="guide_post_step7_title">7. Click the Post button</string>
+    <string name="guide_post_step7_image_desc">Step 7 illustration - Create post</string>
+    <string name="placeholder_username">Username</string> <string name="placeholder_timestamp">04/20/2023 14:30</string>
+    <string name="placeholder_experience_title">Experience Title</string> <string name="location_icon_description">Location icon</string>
+    <string name="placeholder_location">Hanoi, Vietnam</string> <string name="placeholder_experience_description">User\'s experience description...</string> <string name="like_button_description">Like button</string>
+    <string name="placeholder_count">0</string> <string name="comment_button_description">Comment button</string>
+    <string name="placeholder_class">class</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_explorer">Explorer</string>
+    <string name="bottom_nav_user_guide">User Guide</string> <string name="bottom_nav_profile">Profile</string>
 </resources>

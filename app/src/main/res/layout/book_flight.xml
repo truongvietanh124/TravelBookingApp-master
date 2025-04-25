@@ -2,339 +2,312 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Scrollable content -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"> <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start" android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:srcCompat="@drawable/back"
+            android:contentDescription="@string/back_button_description"/> <TextView
+        android:id="@+id/title"
+        android:text="@string/guide_book_flight_title" android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"/>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp">
 
-            <ImageView
-                android:id="@+id/backBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
-
-            <TextView
-                android:id="@+id/title"
-                android:text="How to Book a Flight"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- Step 1 -->
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardElevation="6dp">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
+                <TextView
+                    android:text="@string/guide_step1_title" android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:text="1. Select Departure and Destination"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:text="→ Use the dropdown menus to choose cities in the 'From' and 'To' fields."
-                        android:textSize="16sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/dark_gray"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <ImageView
-                        android:id="@+id/img_step1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/step1_image" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Step 2 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardElevation="6dp">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
+                <TextView
+                    android:text="@string/guide_step1_desc" android:textSize="16sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/dark_gray"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:text="2. Select Departure and Return Dates"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:text="→ Tap on the date fields to open the calendar and pick your dates."
-                        android:textSize="16sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/dark_gray"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <ImageView
-                        android:id="@+id/img_step2"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/step2_image" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Step 3 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardElevation="6dp">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="3. Choose Number of Passengers"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:text="→ Use the '+' and '-' buttons to adjust the number of adults and children."
-                        android:textSize="16sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/dark_gray"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <ImageView
-                        android:id="@+id/img_step3"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/step3_image" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Step 4 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardElevation="6dp">
-
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/img_step1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/step1_image"
+                    android:contentDescription="@string/guide_step1_image_desc" /> </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="4. Select Seat Class"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="→ Choose from Economy, Business, or First Class."
-                        android:textColor="@color/dark_gray"
-                        android:textSize="16sp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/img_step4"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/step4_image" />
+                <TextView
+                    android:text="@string/guide_step2_title" android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                <TextView
+                    android:text="@string/guide_step2_desc" android:textSize="16sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <!-- Step 5 -->
-            <androidx.cardview.widget.CardView
+                <ImageView
+                    android:id="@+id/img_step2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/step2_image"
+                    android:contentDescription="@string/guide_step2_image_desc" /> </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/guide_step3_title" android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="@string/guide_step3_desc" android:textSize="16sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:id="@+id/img_step3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/step3_image"
+                    android:contentDescription="@string/guide_step3_image_desc" /> </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardElevation="6dp">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="@string/guide_step4_title" android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:text="5. Tap on “Search Flights”"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/guide_step4_desc" android:textColor="@color/dark_gray"
+                    android:textSize="16sp" />
 
-                    <TextView
-                        android:text="→ The app will search and display available flights that match your criteria."
-                        android:textSize="16sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/dark_gray"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/img_step4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/step4_image"
+                    android:contentDescription="@string/guide_step4_image_desc" /> </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/img_step5"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/step5_image" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp">
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Step 6 -->
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardElevation="6dp">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
+                <TextView
+                    android:text="@string/guide_step5_title" android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:text="6. Choose a Flight"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="@string/guide_step5_desc" android:textSize="16sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:text="→ Choose a suitable airline and departure time."
-                        android:textSize="16sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/dark_gray"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/img_step5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/step5_image"
+                    android:contentDescription="@string/guide_step5_image_desc" /> </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/img_step6"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/step6_image" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp">
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Step 7 -->
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardElevation="6dp">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
+                <TextView
+                    android:text="@string/guide_step6_title" android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:text="7. Choose a seat"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="@string/guide_step6_desc" android:textSize="16sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:text="→ Select the seat that's right for you"
-                        android:textSize="16sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/dark_gray"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/img_step6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/step6_image"
+                    android:contentDescription="@string/guide_step6_image_desc" /> </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/img_step7"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="8dp"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/step7_image" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp">
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        </LinearLayout>
+                <TextView
+                    android:text="@string/guide_step7_title" android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="@string/guide_step7_desc" android:textSize="16sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:id="@+id/img_step7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/step7_image"
+                    android:contentDescription="@string/guide_step7_image_desc" /> </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

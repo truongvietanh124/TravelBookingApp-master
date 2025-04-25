@@ -4,25 +4,21 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/bottom_btn1"
-        android:title="Home"
-        app:cnb_backgroundColor="@color/blue"
+        android:title="@string/bottom_nav_home" app:cnb_backgroundColor="@color/blue"
         app:cnb_iconColor="@color/white" />
     <item
         android:id="@+id/explorer"
         android:icon="@drawable/bottom_btn2"
-        android:title="Explorer"
-        app:cnb_backgroundColor="@color/blue"
+        android:title="@string/bottom_nav_explorer" app:cnb_backgroundColor="@color/blue"
         app:cnb_iconColor="@color/white" />
     <item
         android:id="@+id/bookmark"
         android:icon="@drawable/bottom_btn3"
-        android:title="UserGuide"
-        app:cnb_backgroundColor="@color/blue"
+        android:title="@string/bottom_nav_user_guide" app:cnb_backgroundColor="@color/blue"
         app:cnb_iconColor="@color/white" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/bottom_btn4"
-        android:title="Profile"
-        app:cnb_backgroundColor="@color/blue"
+        android:title="@string/bottom_nav_profile" app:cnb_backgroundColor="@color/blue"
         app:cnb_iconColor="@color/white" />
 </menu>

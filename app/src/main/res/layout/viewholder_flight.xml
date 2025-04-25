@@ -8,14 +8,15 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/white_bg">
+    android:paddingBottom="8dp" android:background="@drawable/white_bg">
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/airline_logo_description" app:layout_constraintWidth_max="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,8 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="time"
-        android:textStyle="bold"
+        android:text="@string/label_time_placeholder" android:textStyle="bold"
         android:textColor="@color/blue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/logo"
@@ -36,11 +36,12 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/flight_route_icon_description" app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintEnd_toStartOf="@+id/toTxt"
+        app:layout_constraintStart_toEndOf="@+id/fromTxt"
         app:layout_constraintTop_toBottomOf="@+id/arrivalTxt"
         app:srcCompat="@drawable/line_airple_blue" />
 
@@ -48,49 +49,39 @@
         android:id="@+id/fromTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/from"
-        android:textColor="@color/black"
+        android:layout_marginStart="16dp" android:text="@string/from" android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/fromShortTxt"
-        app:layout_constraintEnd_toStartOf="@+id/imageView11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arrivalTxt" />
+        app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
     <TextView
         android:id="@+id/fromShortTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="from"
-        android:textColor="@color/black"
+        android:text="@string/placeholder_from_short" android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-        app:layout_constraintEnd_toEndOf="@+id/fromTxt"
-        app:layout_constraintStart_toStartOf="@+id/fromTxt"
-        app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
+        app:layout_constraintStart_toStartOf="@+id/fromTxt" app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
 
     <TextView
         android:id="@+id/toTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/to"
-        android:textColor="@color/black"
+        android:layout_marginEnd="16dp" android:text="@string/to" android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/toShortTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
     <TextView
         android:id="@+id/toShortTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/toShort"
-        android:textSize="18sp"
+        android:text="@string/toShort" android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-        app:layout_constraintEnd_toEndOf="@+id/toTxt"
-        app:layout_constraintStart_toStartOf="@+id/toTxt"
-        app:layout_constraintTop_toBottomOf="@+id/toTxt" />
+        app:layout_constraintEnd_toEndOf="@+id/toTxt" app:layout_constraintTop_toBottomOf="@+id/toTxt" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -98,10 +89,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@null" app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11"
-        app:srcCompat="@drawable/dash_line" />
+        app:layout_constraintTop_toBottomOf="@+id/fromShortTxt" app:srcCompat="@drawable/dash_line" />
 
     <TextView
         android:id="@+id/priceTxt"
@@ -109,14 +99,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="$0.0"
-        android:textColor="@color/blue"
+        android:text="@string/price_placeholder_vnd" android:textColor="@color/blue"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+        app:layout_constraintTop_toTopOf="@+id/imageView13" />
 
     <ImageView
         android:id="@+id/imageView13"
@@ -124,9 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/seat_icon_description" app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView12"
         app:srcCompat="@drawable/seat_blue" />
 
@@ -135,10 +121,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="class"
-        android:textStyle="bold"
+        android:text="@string/placeholder_class" android:textStyle="bold"
         android:textColor="@color/black"
-
         app:layout_constraintBottom_toBottomOf="@+id/imageView13"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="@+id/imageView13" />
