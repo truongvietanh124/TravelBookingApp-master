@@ -4,16 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log; // Thêm import Log
 import android.view.View;
-
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+// Bỏ import Button, ImageButton, ImageView, TextView không cần thiết khi dùng binding trực tiếp
+import android.widget.LinearLayout; // Import cho itemCollectionLayout
 import android.widget.Toast; // Thêm import Toast
 
 import androidx.annotation.NonNull; // Thêm import NonNull
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager; // Thêm import LayoutManager
 import androidx.recyclerview.widget.RecyclerView; // Thêm import RecyclerView
@@ -49,8 +44,6 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseDatabase rtDb; // Realtime DB cho experiences
     private FirebaseUser currentUser;
 
-
-    private LinearLayout myOrderLayout ;
     // Khai báo Adapter và Listener cho ảnh preview
     private CollectionPreviewAdapter previewAdapter;
     private ValueEventListener experiencePreviewListener;
@@ -61,28 +54,15 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // --- Khởi tạo ViewBinding ---
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        setContentView(R.layout.activity_profile);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        // Ánh xạ các view từ layout
-        ivProfileImage = findViewById(R.id.iv_profile_image);
-        tvUsername = findViewById(R.id.tv_username);
-        tvUserEmail = findViewById(R.id.tv_user_email); // ID của TextView
-        backBtn = findViewById(R.id.backBtn); // Ánh xạ nút back
-        myOrderLayout = findViewById(R.id.openOrder);
-        // Khởi tạo Firebase
-    
-
+        // --- Khởi tạo Firebase ---
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         rtDb = FirebaseDatabase.getInstance();
         currentUser = mAuth.getCurrentUser();
-
-
-        myOrderLayout.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, MyOrderActivity.class);
-            startActivity(intent);
-        });
 
         // --- Cài đặt RecyclerView cho ảnh Preview ---
         // Phải gọi trước khi load data để adapter sẵn sàng
